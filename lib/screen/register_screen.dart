@@ -27,27 +27,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          TextField(
-            keyboardType: TextInputType.emailAddress,
-            autocorrect: false,
-            enableSuggestions: false,
-            controller: mail,
-            decoration: const InputDecoration(hintText: "Enter your mail"),
-          ),
-          TextField(
-            obscureText: true,
-            autocorrect: false,
-            enableSuggestions: false,
-            controller: password,
-            decoration: const InputDecoration(hintText: "Enter your password"),
-          ),
-          TextButton(onPressed: () {}, child: const Text("Login"))
-        ],
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Login"),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            TextField(
+              keyboardType: TextInputType.emailAddress,
+              autocorrect: false,
+              enableSuggestions: false,
+              controller: mail,
+              decoration: const InputDecoration(hintText: "Enter your mail"),
+            ),
+            TextField(
+              obscureText: true,
+              autocorrect: false,
+              enableSuggestions: false,
+              controller: password,
+              decoration:
+                  const InputDecoration(hintText: "Enter your password"),
+            ),
+            TextButton(onPressed: () {}, child: const Text("Login"))
+          ],
+        ),
       ),
     );
   }

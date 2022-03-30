@@ -27,27 +27,33 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          TextField(
-            controller: mail,
-            autocorrect: false,
-            enableSuggestions: false,
-            keyboardType: TextInputType.emailAddress,
-            decoration: const InputDecoration(hintText: "Enter your mail"),
-          ),
-          TextField(
-            controller: password,
-            autocorrect: false,
-            enableSuggestions: false,
-            obscureText: true,
-            decoration: const InputDecoration(hintText: "Enter your password"),
-          ),
-          TextButton(onPressed: () {}, child: const Text("Login"))
-        ],
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Login"),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextField(
+              controller: mail,
+              autocorrect: false,
+              enableSuggestions: false,
+              keyboardType: TextInputType.emailAddress,
+              decoration: const InputDecoration(hintText: "Enter your mail"),
+            ),
+            TextField(
+              controller: password,
+              autocorrect: false,
+              enableSuggestions: false,
+              obscureText: true,
+              decoration:
+                  const InputDecoration(hintText: "Enter your password"),
+            ),
+            TextButton(onPressed: () {}, child: const Text("Login"))
+          ],
+        ),
       ),
     );
   }
