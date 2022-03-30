@@ -29,12 +29,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Login"),
+        title: const Text("Register"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
               keyboardType: TextInputType.emailAddress,
@@ -51,7 +51,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               decoration:
                   const InputDecoration(hintText: "Enter your password"),
             ),
-            TextButton(onPressed: () {}, child: const Text("Login"))
+            TextButton(onPressed: () {}, child: const Text("Register"))
           ],
         ),
       ),

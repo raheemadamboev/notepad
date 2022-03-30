@@ -1,4 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:notepad/navigation/router.gr.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -48,10 +50,14 @@ class _LoginScreenState extends State<LoginScreen> {
               autocorrect: false,
               enableSuggestions: false,
               obscureText: true,
-              decoration:
-                  const InputDecoration(hintText: "Enter your password"),
+              decoration: const InputDecoration(hintText: "Enter your password"),
             ),
-            TextButton(onPressed: () {}, child: const Text("Login"))
+            TextButton(onPressed: () {}, child: const Text("Login")),
+            TextButton(
+                onPressed: () {
+                  context.router.push(const RegisterScreen());
+                },
+                child: const Text("Register")),
           ],
         ),
       ),
