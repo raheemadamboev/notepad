@@ -1,4 +1,9 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:notepad/navigation/router.gr.dart';
+
+import '../util/helper.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -16,6 +21,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     super.initState();
     mail = TextEditingController();
     password = TextEditingController();
+    observeAuth();
   }
 
   @override
@@ -23,6 +29,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
     mail.dispose();
     password.dispose();
     super.dispose();
+  }
+
+  void observeAuth() async {
+    FirebaseAuth.instance.authStateChanges().listen((user) {
+      if (user != null) context.router.replaceAll([const NoteListScreen()]);
+    });
   }
 
   @override
@@ -48,10 +60,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
               autocorrect: false,
               enableSuggestions: false,
               controller: password,
-              decoration:
-                  const InputDecoration(hintText: "Enter your password"),
+              decoration: const InputDecoration(hintText: "Enter your password"),
             ),
-            TextButton(onPressed: () {}, child: const Text("Register"))
+            TextButton(
+                onPressed: () async {
+                  try {
+                    await FirebaseAuth.instance.createUserWithEmailAndPassword(email: mail.text, password: password.text);
+                  } on FirebaseAuthException catch (e) {
+                    final snackbar = SnackBar(content: Text(getMessageFromErrorCode(e.code)));
+                    ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                  }
+                },
+                child: const Text("Register"))
           ],
         ),
       ),
