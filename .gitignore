@@ -46,4 +46,4 @@ app.*.map.json
 /android/app/release
 
 # Api keys
-lib/firebase_options.dart
+lib/data/remote/firebase_options.dart
