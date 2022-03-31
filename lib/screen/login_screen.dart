@@ -1,6 +1,9 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:notepad/navigation/router.gr.dart';
+
+import '../util/helper.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -18,6 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
     super.initState();
     mail = TextEditingController();
     password = TextEditingController();
+    observeAuth();
   }
 
   @override
@@ -25,6 +29,12 @@ class _LoginScreenState extends State<LoginScreen> {
     mail.dispose();
     password.dispose();
     super.dispose();
+  }
+
+  void observeAuth() {
+    FirebaseAuth.instance.authStateChanges().listen((user) {
+      if (user != null) context.router.replace(const NoteListScreen());
+    });
   }
 
   @override
@@ -52,7 +62,16 @@ class _LoginScreenState extends State<LoginScreen> {
               obscureText: true,
               decoration: const InputDecoration(hintText: "Enter your password"),
             ),
-            TextButton(onPressed: () {}, child: const Text("Login")),
+            TextButton(
+                onPressed: () async {
+                  try {
+                    await FirebaseAuth.instance.signInWithEmailAndPassword(email: mail.text, password: password.text);
+                  } on FirebaseAuthException catch (e) {
+                    final snackbar = SnackBar(content: Text(getMessageFromErrorCode(e.code)));
+                    ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                  }
+                },
+                child: const Text("Login")),
             TextButton(
                 onPressed: () {
                   context.router.push(const RegisterScreen());
