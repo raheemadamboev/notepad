@@ -1,18 +1,18 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:notepad/navigation/router.gr.dart';
 
-import '../util/helper.dart';
+import '../../core/util/helper.dart';
+import '../navigation/router.gr.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   late final TextEditingController mail;
   late final TextEditingController password;
 
@@ -31,9 +31,9 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  void observeAuth() {
+  void observeAuth() async {
     FirebaseAuth.instance.authStateChanges().listen((user) {
-      if (user != null) context.router.replace(const NoteListScreen());
+      if (user != null) context.router.replaceAll([const NoteListScreen()]);
     });
   }
 
@@ -41,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Login"),
+        title: const Text("Register"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -49,34 +49,29 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
-              controller: mail,
+              keyboardType: TextInputType.emailAddress,
               autocorrect: false,
               enableSuggestions: false,
-              keyboardType: TextInputType.emailAddress,
+              controller: mail,
               decoration: const InputDecoration(hintText: "Enter your mail"),
             ),
             TextField(
-              controller: password,
+              obscureText: true,
               autocorrect: false,
               enableSuggestions: false,
-              obscureText: true,
+              controller: password,
               decoration: const InputDecoration(hintText: "Enter your password"),
             ),
             TextButton(
                 onPressed: () async {
                   try {
-                    await FirebaseAuth.instance.signInWithEmailAndPassword(email: mail.text, password: password.text);
+                    await FirebaseAuth.instance.createUserWithEmailAndPassword(email: mail.text, password: password.text);
                   } on FirebaseAuthException catch (e) {
                     final snackbar = SnackBar(content: Text(getMessageFromErrorCode(e.code)));
                     ScaffoldMessenger.of(context).showSnackBar(snackbar);
                   }
                 },
-                child: const Text("Login")),
-            TextButton(
-                onPressed: () {
-                  context.router.push(const RegisterScreen());
-                },
-                child: const Text("Register")),
+                child: const Text("Register"))
           ],
         ),
       ),
