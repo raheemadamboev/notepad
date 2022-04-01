@@ -4,9 +4,9 @@ import 'package:notepad/data/repository/auth_repository.dart';
 
 @module
 abstract class InjectableModule {
-  @singleton
+  @lazySingleton
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
-  @singleton
+  @lazySingleton
   AuthRepository authRepository(FirebaseAuth auth) => AuthRepository(auth: auth);
 }
