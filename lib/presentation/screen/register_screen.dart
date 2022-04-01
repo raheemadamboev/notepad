@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../../core/util/helper.dart';
 import '../navigation/router.gr.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -67,8 +66,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   try {
                     await FirebaseAuth.instance.createUserWithEmailAndPassword(email: mail.text, password: password.text);
                   } on FirebaseAuthException catch (e) {
-                    final snackbar = SnackBar(content: Text(getMessageFromErrorCode(e.code)));
-                    ScaffoldMessenger.of(context).showSnackBar(snackbar);
                   }
                 },
                 child: const Text("Register"))
