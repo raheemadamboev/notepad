@@ -1,28 +1,28 @@
-class SignInException implements Exception {
-  const SignInException([
+class LoginException implements Exception {
+  const LoginException([
     this.message = "An unknown exception occurred.",
   ]);
 
-  factory SignInException.fromCode(String code) {
+  factory LoginException.fromCode(String code) {
     switch (code) {
       case "invalid-email":
-        return const SignInException(
+        return const LoginException(
           "Email is not valid or badly formatted.",
         );
       case "user-disabled":
-        return const SignInException(
+        return const LoginException(
           "This user has been disabled. Please contact support for help.",
         );
       case "user-not-found":
-        return const SignInException(
+        return const LoginException(
           "Email is not found, please create an account.",
         );
       case "wrong-password":
-        return const SignInException(
+        return const LoginException(
           "Incorrect password, please try again.",
         );
       default:
-        return const SignInException();
+        return const LoginException();
     }
   }
 

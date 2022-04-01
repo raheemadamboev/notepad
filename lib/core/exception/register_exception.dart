@@ -1,32 +1,32 @@
-class SignUpException implements Exception {
-  const SignUpException([
+class RegisterException implements Exception {
+  const RegisterException([
     this.message = "An unknown exception occurred.",
   ]);
 
-  factory SignUpException.fromCode(String code) {
+  factory RegisterException.fromCode(String code) {
     switch (code) {
       case "invalid-email":
-        return const SignUpException(
+        return const RegisterException(
           "Email is not valid or badly formatted.",
         );
       case "user-disabled":
-        return const SignUpException(
+        return const RegisterException(
           "This user has been disabled. Please contact support for help.",
         );
       case "email-already-in-use":
-        return const SignUpException(
+        return const RegisterException(
           "An account already exists for that email.",
         );
       case "operation-not-allowed":
-        return const SignUpException(
+        return const RegisterException(
           "Operation is not allowed.  Please contact support.",
         );
       case "weak-password":
-        return const SignUpException(
+        return const RegisterException(
           "Please enter a stronger password.",
         );
       default:
-        return const SignUpException();
+        return const RegisterException();
     }
   }
 
