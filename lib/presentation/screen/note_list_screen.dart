@@ -35,7 +35,13 @@ class _NoteListScreenState extends State<NoteListScreen> {
             ),
             floatingActionButton: FloatingActionButton(
               onPressed: () {
-                context.router.push(const NoteAddScreen());
+                context.router.push(
+                  NoteAddScreen(
+                    onRefresh: (refresh) {
+                      if (refresh) context.read<NoteListCubit>().onGetNotes();
+                    },
+                  ),
+                );
               },
               child: const Icon(Icons.add),
             ),
