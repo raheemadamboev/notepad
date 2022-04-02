@@ -8,14 +8,14 @@ import '../data/repository/auth_repository.dart';
 @module
 abstract class InjectableSingletonModule {
   @singleton
-  FirebaseAuth get auth => FirebaseAuth.instance;
+  FirebaseAuth get provideAuth => FirebaseAuth.instance;
 
   @singleton
-  FirebaseFirestore get firestore => FirebaseFirestore.instance;
+  FirebaseFirestore get provideFirestore => FirebaseFirestore.instance;
 
   @singleton
-  AuthRepository authRepository(FirebaseAuth auth) => AuthRepository(auth);
+  AuthRepository provideAuthRepository(FirebaseAuth auth) => AuthRepository(auth);
 
   @singleton
-  NoteRepository noteRepository(FirebaseFirestore firestore) => NoteRepository(firestore);
+  NoteRepository provideNoteRepository(FirebaseFirestore firestore) => NoteRepository(firestore);
 }

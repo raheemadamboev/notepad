@@ -28,24 +28,25 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   final gh = _i2.GetItHelper(get, environment, environmentFilter);
   final injectableSingletonModule = _$InjectableSingletonModule();
   final injectableModule = _$InjectableModule();
-  gh.singleton<_i3.FirebaseAuth>(injectableSingletonModule.auth);
-  gh.singleton<_i4.FirebaseFirestore>(injectableSingletonModule.firestore);
-  gh.singleton<_i5.NoteRepository>(
-      injectableSingletonModule.noteRepository(get<_i4.FirebaseFirestore>()));
+  gh.singleton<_i3.FirebaseAuth>(injectableSingletonModule.provideAuth);
+  gh.singleton<_i4.FirebaseFirestore>(
+      injectableSingletonModule.provideFirestore);
+  gh.singleton<_i5.NoteRepository>(injectableSingletonModule
+      .provideNoteRepository(get<_i4.FirebaseFirestore>()));
   gh.singleton<_i6.AuthRepository>(
-      injectableSingletonModule.authRepository(get<_i3.FirebaseAuth>()));
+      injectableSingletonModule.provideAuthRepository(get<_i3.FirebaseAuth>()));
   gh.factory<_i7.LoginCubit>(
-      () => injectableModule.loginCubit(get<_i6.AuthRepository>()));
+      () => injectableModule.provideLoginCubit(get<_i6.AuthRepository>()));
   gh.factory<_i8.NoteAddCubit>(
-      () => injectableModule.noteAddCubit(get<_i5.NoteRepository>()));
+      () => injectableModule.provideNoteAddCubit(get<_i5.NoteRepository>()));
   gh.factory<_i9.NoteEditCubit>(
-      () => injectableModule.noteEditCubit(get<_i5.NoteRepository>()));
+      () => injectableModule.provideNoteEditCubit(get<_i5.NoteRepository>()));
   gh.factory<_i10.NoteListCubit>(
-      () => injectableModule.noteListCubit(get<_i5.NoteRepository>()));
+      () => injectableModule.provideNoteListCubit(get<_i5.NoteRepository>()));
   gh.factory<_i11.RegisterCubit>(
-      () => injectableModule.registerCubit(get<_i6.AuthRepository>()));
+      () => injectableModule.provideRegisterCubit(get<_i6.AuthRepository>()));
   gh.factory<_i12.SplashCubit>(
-      () => injectableModule.splashCubit(get<_i6.AuthRepository>()));
+      () => injectableModule.provideSplashCubit(get<_i6.AuthRepository>()));
   return get;
 }
 

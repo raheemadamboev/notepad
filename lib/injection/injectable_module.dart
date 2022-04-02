@@ -11,20 +11,20 @@ import 'package:notepad/presentation/viewmodel/splash/splash_cubit.dart';
 @module
 abstract class InjectableModule {
   @injectable
-  SplashCubit splashCubit(AuthRepository repository) => SplashCubit(repository);
+  SplashCubit provideSplashCubit(AuthRepository repository) => SplashCubit(repository);
 
   @injectable
-  LoginCubit loginCubit(AuthRepository repository) => LoginCubit(repository);
+  LoginCubit provideLoginCubit(AuthRepository repository) => LoginCubit(repository);
 
   @injectable
-  RegisterCubit registerCubit(AuthRepository repository) => RegisterCubit(repository);
+  RegisterCubit provideRegisterCubit(AuthRepository repository) => RegisterCubit(repository);
 
   @injectable
-  NoteListCubit noteListCubit(NoteRepository repository) => NoteListCubit(repository);
+  NoteListCubit provideNoteListCubit(NoteRepository repository) => NoteListCubit(repository);
 
   @injectable
-  NoteAddCubit noteAddCubit(NoteRepository repository) => NoteAddCubit(repository);
+  NoteAddCubit provideNoteAddCubit(NoteRepository repository) => NoteAddCubit(repository);
 
   @injectable
-  NoteEditCubit noteEditCubit(NoteRepository repository) => NoteEditCubit(repository);
+  NoteEditCubit provideNoteEditCubit(NoteRepository repository) => NoteEditCubit(repository);
 }
