@@ -10,20 +10,25 @@ import 'package:injectable/injectable.dart' as _i2;
 
 import '../data/repository/auth_repository.dart' as _i4;
 import '../presentation/viewmodel/login/login_cubit.dart' as _i5;
-import 'injectable_module.dart' as _i6; // ignore_for_file: unnecessary_lambdas
+import 'injectable_module.dart' as _i7;
+import 'injectable_singleton_module.dart'
+    as _i6; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
 _i1.GetIt $initGetIt(_i1.GetIt get,
     {String? environment, _i2.EnvironmentFilter? environmentFilter}) {
   final gh = _i2.GetItHelper(get, environment, environmentFilter);
+  final injectableSingletonModule = _$InjectableSingletonModule();
   final injectableModule = _$InjectableModule();
-  gh.singleton<_i3.FirebaseAuth>(injectableModule.auth);
+  gh.singleton<_i3.FirebaseAuth>(injectableSingletonModule.auth);
   gh.singleton<_i4.AuthRepository>(
-      injectableModule.authRepository(get<_i3.FirebaseAuth>()));
+      injectableSingletonModule.authRepository(get<_i3.FirebaseAuth>()));
   gh.factory<_i5.LoginCubit>(
       () => injectableModule.loginCubit(get<_i4.AuthRepository>()));
   return get;
 }
 
-class _$InjectableModule extends _i6.InjectableModule {}
+class _$InjectableSingletonModule extends _i6.InjectableSingletonModule {}
+
+class _$InjectableModule extends _i7.InjectableModule {}
