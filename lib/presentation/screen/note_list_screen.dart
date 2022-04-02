@@ -62,7 +62,14 @@ class _NoteListScreenState extends State<NoteListScreen> {
                     elevation: 2,
                     child: InkWell(
                       onTap: () {
-                        context.router.push(NoteEditScreen(note: notes[index]));
+                        context.router.push(
+                          NoteEditScreen(
+                            note: notes[index],
+                            onRefresh: (refresh) {
+                              if (refresh) context.read<NoteListCubit>().onGetNotes();
+                            },
+                          ),
+                        );
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(14.0),

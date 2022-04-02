@@ -15,6 +15,13 @@ class NoteRepository {
     });
   }
 
+  Future<void> updateNote(NoteModel note) async {
+    await _firestore
+        .collection(Notes.cName)
+        .doc(note.id)
+        .update({Notes.title: note.title, Notes.content: note.content});
+  }
+
   Future<List<NoteModel>> getNotes() async {
     final snapshot =
         await _firestore.collection(Notes.cName).orderBy(Notes.timestamp, descending: true).get();

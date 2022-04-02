@@ -53,7 +53,8 @@ class AppRouter extends _i7.RootStackRouter {
       final args = routeData.argsAs<NoteEditScreenArgs>();
       return _i7.MaterialPageX<dynamic>(
           routeData: routeData,
-          child: _i6.NoteEditScreen(args.note, key: args.key));
+          child: _i6.NoteEditScreen(
+              key: args.key, note: args.note, onRefresh: args.onRefresh));
     }
   };
 
@@ -128,23 +129,30 @@ class NoteAddScreenArgs {
 /// generated route for
 /// [_i6.NoteEditScreen]
 class NoteEditScreen extends _i7.PageRouteInfo<NoteEditScreenArgs> {
-  NoteEditScreen({required _i9.NoteModel note, _i8.Key? key})
+  NoteEditScreen(
+      {_i8.Key? key,
+      required _i9.NoteModel note,
+      required void Function(bool) onRefresh})
       : super(NoteEditScreen.name,
             path: '/note-edit-screen',
-            args: NoteEditScreenArgs(note: note, key: key));
+            args:
+                NoteEditScreenArgs(key: key, note: note, onRefresh: onRefresh));
 
   static const String name = 'NoteEditScreen';
 }
 
 class NoteEditScreenArgs {
-  const NoteEditScreenArgs({required this.note, this.key});
-
-  final _i9.NoteModel note;
+  const NoteEditScreenArgs(
+      {this.key, required this.note, required this.onRefresh});
 
   final _i8.Key? key;
 
+  final _i9.NoteModel note;
+
+  final void Function(bool) onRefresh;
+
   @override
   String toString() {
-    return 'NoteEditScreenArgs{note: $note, key: $key}';
+    return 'NoteEditScreenArgs{key: $key, note: $note, onRefresh: $onRefresh}';
   }
 }
