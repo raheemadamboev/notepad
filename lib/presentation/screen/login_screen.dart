@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notepad/injection/injectable_config.dart';
+import 'package:notepad/presentation/viewmodel/login/login_cubit.dart';
 
 import '../navigation/router.gr.dart';
 
@@ -12,69 +14,86 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  late final TextEditingController mail;
-  late final TextEditingController password;
+  late final TextEditingController _mail;
+  late final TextEditingController _password;
 
   @override
   void initState() {
     super.initState();
-    mail = TextEditingController();
-    password = TextEditingController();
-    observeAuth();
+    _mail = TextEditingController();
+    _password = TextEditingController();
   }
 
   @override
   void dispose() {
-    mail.dispose();
-    password.dispose();
     super.dispose();
-  }
-
-  void observeAuth() {
-    FirebaseAuth.instance.authStateChanges().listen((user) {
-      if (user != null) context.router.replace(const NoteListScreen());
-    });
+    _mail.dispose();
+    _password.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Login"),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextField(
-              controller: mail,
-              autocorrect: false,
-              enableSuggestions: false,
-              keyboardType: TextInputType.emailAddress,
-              decoration: const InputDecoration(hintText: "Enter your mail"),
+    return BlocProvider(
+      create: (context) => inject<LoginCubit>(),
+      child: BlocConsumer<LoginCubit, LoginState>(
+        listener: (context, state) {
+          state.maybeWhen(
+              error: (message) {
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(SnackBar(content: Text(message)));
+              },
+              success: () {
+                context.router.replace(const NoteListScreen());
+              },
+              orElse: () {});
+        },
+        builder: (context, state) {
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text("Login"),
             ),
-            TextField(
-              controller: password,
-              autocorrect: false,
-              enableSuggestions: false,
-              obscureText: true,
-              decoration: const InputDecoration(hintText: "Enter your password"),
+            body: state.maybeWhen(
+              loading: () => const Center(
+                child: CircularProgressIndicator(),
+              ),
+              orElse: () => Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextField(
+                      controller: _mail,
+                      autocorrect: false,
+                      enableSuggestions: false,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: const InputDecoration(hintText: "Enter your mail"),
+                    ),
+                    TextField(
+                      controller: _password,
+                      autocorrect: false,
+                      enableSuggestions: false,
+                      obscureText: true,
+                      decoration: const InputDecoration(hintText: "Enter your password"),
+                    ),
+                    TextButton(
+                        onPressed: () {
+                          context
+                              .read<LoginCubit>()
+                              .onLogin(mail: _mail.text, password: _password.text);
+                        },
+                        child: const Text("Login")),
+                    TextButton(
+                        onPressed: () {
+                          context.router.push(const RegisterScreen());
+                        },
+                        child: const Text("Register")),
+                  ],
+                ),
+              ),
             ),
-            TextButton(
-                onPressed: () async {
-                  try {
-                    await FirebaseAuth.instance.signInWithEmailAndPassword(email: mail.text, password: password.text);
-                  } on FirebaseAuthException catch (e) {}
-                },
-                child: const Text("Login")),
-            TextButton(
-                onPressed: () {
-                  context.router.push(const RegisterScreen());
-                },
-                child: const Text("Register")),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
