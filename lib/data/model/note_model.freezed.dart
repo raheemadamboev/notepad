@@ -19,10 +19,10 @@ class _$NoteModelTearOff {
   const _$NoteModelTearOff();
 
   _NoteModel call(
-      {required String id,
+      {String? id,
       required String title,
       required String content,
-      required DateTime timestamp}) {
+      DateTime? timestamp}) {
     return _NoteModel(
       id: id,
       title: title,
@@ -37,10 +37,10 @@ const $NoteModel = _$NoteModelTearOff();
 
 /// @nodoc
 mixin _$NoteModel {
-  String get id => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
-  DateTime get timestamp => throw _privateConstructorUsedError;
+  DateTime? get timestamp => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $NoteModelCopyWith<NoteModel> get copyWith =>
@@ -51,7 +51,7 @@ mixin _$NoteModel {
 abstract class $NoteModelCopyWith<$Res> {
   factory $NoteModelCopyWith(NoteModel value, $Res Function(NoteModel) then) =
       _$NoteModelCopyWithImpl<$Res>;
-  $Res call({String id, String title, String content, DateTime timestamp});
+  $Res call({String? id, String title, String content, DateTime? timestamp});
 }
 
 /// @nodoc
@@ -73,7 +73,7 @@ class _$NoteModelCopyWithImpl<$Res> implements $NoteModelCopyWith<$Res> {
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -85,7 +85,7 @@ class _$NoteModelCopyWithImpl<$Res> implements $NoteModelCopyWith<$Res> {
       timestamp: timestamp == freezed
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
     ));
   }
 }
@@ -96,7 +96,7 @@ abstract class _$NoteModelCopyWith<$Res> implements $NoteModelCopyWith<$Res> {
           _NoteModel value, $Res Function(_NoteModel) then) =
       __$NoteModelCopyWithImpl<$Res>;
   @override
-  $Res call({String id, String title, String content, DateTime timestamp});
+  $Res call({String? id, String title, String content, DateTime? timestamp});
 }
 
 /// @nodoc
@@ -119,7 +119,7 @@ class __$NoteModelCopyWithImpl<$Res> extends _$NoteModelCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -131,7 +131,7 @@ class __$NoteModelCopyWithImpl<$Res> extends _$NoteModelCopyWithImpl<$Res>
       timestamp: timestamp == freezed
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
     ));
   }
 }
@@ -140,19 +140,16 @@ class __$NoteModelCopyWithImpl<$Res> extends _$NoteModelCopyWithImpl<$Res>
 
 class _$_NoteModel implements _NoteModel {
   const _$_NoteModel(
-      {required this.id,
-      required this.title,
-      required this.content,
-      required this.timestamp});
+      {this.id, required this.title, required this.content, this.timestamp});
 
   @override
-  final String id;
+  final String? id;
   @override
   final String title;
   @override
   final String content;
   @override
-  final DateTime timestamp;
+  final DateTime? timestamp;
 
   @override
   String toString() {
@@ -186,19 +183,19 @@ class _$_NoteModel implements _NoteModel {
 
 abstract class _NoteModel implements NoteModel {
   const factory _NoteModel(
-      {required String id,
+      {String? id,
       required String title,
       required String content,
-      required DateTime timestamp}) = _$_NoteModel;
+      DateTime? timestamp}) = _$_NoteModel;
 
   @override
-  String get id;
+  String? get id;
   @override
   String get title;
   @override
   String get content;
   @override
-  DateTime get timestamp;
+  DateTime? get timestamp;
   @override
   @JsonKey(ignore: true)
   _$NoteModelCopyWith<_NoteModel> get copyWith =>

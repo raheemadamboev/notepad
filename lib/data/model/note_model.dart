@@ -5,8 +5,8 @@ part 'note_model.freezed.dart';
 @freezed
 class NoteModel with _$NoteModel {
   const factory NoteModel(
-      {required String id,
+      {String? id,
       required String title,
       required String content,
-      required DateTime timestamp}) = _NoteModel;
+      DateTime? timestamp}) = _NoteModel;
 }
