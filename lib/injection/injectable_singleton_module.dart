@@ -9,5 +9,5 @@ abstract class InjectableSingletonModule {
   FirebaseAuth get auth => FirebaseAuth.instance;
 
   @singleton
-  AuthRepository authRepository(FirebaseAuth auth) => AuthRepository(auth: auth);
+  AuthRepository authRepository(FirebaseAuth auth) => AuthRepository(auth);
 }

@@ -38,13 +38,13 @@ class _LoginScreenState extends State<LoginScreen> {
       child: BlocConsumer<LoginCubit, LoginState>(
         listener: (context, state) {
           state.maybeWhen(
+              success: () {
+                context.router.replace(const NoteListScreen());
+              },
               error: (message) {
                 ScaffoldMessenger.of(context)
                   ..hideCurrentSnackBar()
                   ..showSnackBar(SnackBar(content: Text(message)));
-              },
-              success: () {
-                context.router.replace(const NoteListScreen());
               },
               orElse: () {});
         },
