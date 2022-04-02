@@ -44,8 +44,10 @@ class AppRouter extends _i7.RootStackRouter {
           routeData: routeData, child: const _i4.NoteListScreen());
     },
     NoteAddScreen.name: (routeData) {
+      final args = routeData.argsAs<NoteAddScreenArgs>();
       return _i7.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i5.NoteAddScreen());
+          routeData: routeData,
+          child: _i5.NoteAddScreen(key: args.key, onRefresh: args.onRefresh));
     },
     NoteEditScreen.name: (routeData) {
       final args = routeData.argsAs<NoteEditScreenArgs>();
@@ -101,10 +103,26 @@ class NoteListScreen extends _i7.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.NoteAddScreen]
-class NoteAddScreen extends _i7.PageRouteInfo<void> {
-  const NoteAddScreen() : super(NoteAddScreen.name, path: '/note-add-screen');
+class NoteAddScreen extends _i7.PageRouteInfo<NoteAddScreenArgs> {
+  NoteAddScreen({_i8.Key? key, required void Function(bool) onRefresh})
+      : super(NoteAddScreen.name,
+            path: '/note-add-screen',
+            args: NoteAddScreenArgs(key: key, onRefresh: onRefresh));
 
   static const String name = 'NoteAddScreen';
+}
+
+class NoteAddScreenArgs {
+  const NoteAddScreenArgs({this.key, required this.onRefresh});
+
+  final _i8.Key? key;
+
+  final void Function(bool) onRefresh;
+
+  @override
+  String toString() {
+    return 'NoteAddScreenArgs{key: $key, onRefresh: $onRefresh}';
+  }
 }
 
 /// generated route for
