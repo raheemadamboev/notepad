@@ -3,13 +3,13 @@ import 'package:notepad/core/exception/login_exception.dart';
 import 'package:notepad/core/exception/register_exception.dart';
 
 class AuthRepository {
-  final FirebaseAuth auth;
+  final FirebaseAuth _auth;
 
-  const AuthRepository({required this.auth});
+  const AuthRepository(this._auth);
 
   Future<void> login({required String mail, required String password}) async {
     try {
-      await auth.signInWithEmailAndPassword(email: mail, password: password);
+      await _auth.signInWithEmailAndPassword(email: mail, password: password);
     } on FirebaseAuthException catch (e) {
       throw LoginException.fromCode(e.code);
     } catch (_) {
@@ -19,7 +19,7 @@ class AuthRepository {
 
   Future<void> register({required String mail, required String password}) async {
     try {
-      await auth.createUserWithEmailAndPassword(email: mail, password: password);
+      await _auth.createUserWithEmailAndPassword(email: mail, password: password);
     } on FirebaseAuthException catch (e) {
       throw RegisterException.fromCode(e.code);
     } catch (_) {
