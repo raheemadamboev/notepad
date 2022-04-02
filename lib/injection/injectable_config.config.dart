@@ -12,12 +12,13 @@ import 'package:injectable/injectable.dart' as _i2;
 import '../data/repository/auth_repository.dart' as _i6;
 import '../data/repository/note_repository.dart' as _i5;
 import '../presentation/viewmodel/login/login_cubit.dart' as _i7;
-import '../presentation/viewmodel/note_list/note_list_cubit.dart' as _i8;
-import '../presentation/viewmodel/register/register_cubit.dart' as _i9;
-import '../presentation/viewmodel/splash/splash_cubit.dart' as _i10;
-import 'injectable_module.dart' as _i12;
+import '../presentation/viewmodel/note_add/note_add_cubit.dart' as _i8;
+import '../presentation/viewmodel/note_list/note_list_cubit.dart' as _i9;
+import '../presentation/viewmodel/register/register_cubit.dart' as _i10;
+import '../presentation/viewmodel/splash/splash_cubit.dart' as _i11;
+import 'injectable_module.dart' as _i13;
 import 'injectable_singleton_module.dart'
-    as _i11; // ignore_for_file: unnecessary_lambdas
+    as _i12; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -34,15 +35,17 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       injectableSingletonModule.authRepository(get<_i3.FirebaseAuth>()));
   gh.factory<_i7.LoginCubit>(
       () => injectableModule.loginCubit(get<_i6.AuthRepository>()));
-  gh.factory<_i8.NoteListCubit>(
+  gh.factory<_i8.NoteAddCubit>(
+      () => injectableModule.noteAddCubit(get<_i5.NoteRepository>()));
+  gh.factory<_i9.NoteListCubit>(
       () => injectableModule.noteListCubit(get<_i5.NoteRepository>()));
-  gh.factory<_i9.RegisterCubit>(
+  gh.factory<_i10.RegisterCubit>(
       () => injectableModule.registerCubit(get<_i6.AuthRepository>()));
-  gh.factory<_i10.SplashCubit>(
+  gh.factory<_i11.SplashCubit>(
       () => injectableModule.splashCubit(get<_i6.AuthRepository>()));
   return get;
 }
 
-class _$InjectableSingletonModule extends _i11.InjectableSingletonModule {}
+class _$InjectableSingletonModule extends _i12.InjectableSingletonModule {}
 
-class _$InjectableModule extends _i12.InjectableModule {}
+class _$InjectableModule extends _i13.InjectableModule {}
