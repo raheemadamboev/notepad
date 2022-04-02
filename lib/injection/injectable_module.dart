@@ -1,6 +1,8 @@
 import 'package:injectable/injectable.dart';
 import 'package:notepad/data/repository/auth_repository.dart';
+import 'package:notepad/data/repository/note_repository.dart';
 import 'package:notepad/presentation/viewmodel/login/login_cubit.dart';
+import 'package:notepad/presentation/viewmodel/note_list/note_list_cubit.dart';
 import 'package:notepad/presentation/viewmodel/register/register_cubit.dart';
 import 'package:notepad/presentation/viewmodel/splash/splash_cubit.dart';
 
@@ -14,4 +16,7 @@ abstract class InjectableModule {
 
   @injectable
   RegisterCubit registerCubit(AuthRepository repository) => RegisterCubit(repository);
+
+  @injectable
+  NoteListCubit noteListCubit(NoteRepository repository) => NoteListCubit(repository);
 }
