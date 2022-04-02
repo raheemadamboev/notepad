@@ -8,14 +8,14 @@ part 'login_cubit.freezed.dart';
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
-  final AuthRepository repository;
+  final AuthRepository _repository;
 
-  LoginCubit(this.repository) : super(const LoginState.initial());
+  LoginCubit(this._repository) : super(const LoginState.initial());
 
   Future<void> onLogin({required String mail, required String password}) async {
     try {
       emit(const LoginState.loading());
-      await repository.login(mail: mail, password: password);
+      await _repository.login(mail: mail, password: password);
       emit(const LoginState.success());
     } on LoginException catch (e) {
       emit(LoginState.error(message: e.message));
