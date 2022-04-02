@@ -7,8 +7,17 @@ class NoteRepository {
 
   NoteRepository(this._firestore);
 
+  Future<void> insertNote(NoteModel note) async {
+    await _firestore.collection(Notes.cName).add({
+      Notes.title: note.title,
+      Notes.content: note.content,
+      Notes.timestamp: FieldValue.serverTimestamp()
+    });
+  }
+
   Future<List<NoteModel>> getNotes() async {
-    final snapshot = await _firestore.collection(Notes.cName).get();
+    final snapshot =
+        await _firestore.collection(Notes.cName).orderBy(Notes.timestamp, descending: true).get();
     return snapshot.docs
         .map((data) => NoteModel(
             id: data.id,
