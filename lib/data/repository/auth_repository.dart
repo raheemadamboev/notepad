@@ -7,6 +7,13 @@ class AuthRepository {
 
   const AuthRepository(this._auth);
 
+  /// intentional delay to show splash screen
+  Future<bool> userAuthenticated() async {
+    await Future.delayed(const Duration(seconds: 1));
+    final user = _auth.currentUser;
+    return user != null;
+  }
+
   Future<void> login({required String mail, required String password}) async {
     try {
       await _auth.signInWithEmailAndPassword(email: mail, password: password);

@@ -11,9 +11,10 @@ import 'package:injectable/injectable.dart' as _i2;
 import '../data/repository/auth_repository.dart' as _i4;
 import '../presentation/viewmodel/login/login_cubit.dart' as _i5;
 import '../presentation/viewmodel/register/register_cubit.dart' as _i6;
-import 'injectable_module.dart' as _i8;
+import '../presentation/viewmodel/splash/splash_cubit.dart' as _i7;
+import 'injectable_module.dart' as _i9;
 import 'injectable_singleton_module.dart'
-    as _i7; // ignore_for_file: unnecessary_lambdas
+    as _i8; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -29,9 +30,11 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       () => injectableModule.loginCubit(get<_i4.AuthRepository>()));
   gh.factory<_i6.RegisterCubit>(
       () => injectableModule.registerCubit(get<_i4.AuthRepository>()));
+  gh.factory<_i7.SplashCubit>(
+      () => injectableModule.splashCubit(get<_i4.AuthRepository>()));
   return get;
 }
 
-class _$InjectableSingletonModule extends _i7.InjectableSingletonModule {}
+class _$InjectableSingletonModule extends _i8.InjectableSingletonModule {}
 
-class _$InjectableModule extends _i8.InjectableModule {}
+class _$InjectableModule extends _i9.InjectableModule {}
