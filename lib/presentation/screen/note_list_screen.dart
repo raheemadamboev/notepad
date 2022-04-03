@@ -6,14 +6,9 @@ import 'package:notepad/presentation/navigation/router.gr.dart';
 
 import '../viewmodel/note_list/note_list_cubit.dart';
 
-class NoteListScreen extends StatefulWidget {
+class NoteListScreen extends StatelessWidget {
   const NoteListScreen({Key? key}) : super(key: key);
 
-  @override
-  State<NoteListScreen> createState() => _NoteListScreenState();
-}
-
-class _NoteListScreenState extends State<NoteListScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
