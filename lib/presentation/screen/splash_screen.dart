@@ -16,13 +16,14 @@ class SplashScreen extends StatelessWidget {
       child: BlocListener<SplashCubit, SplashState>(
         listener: (context, state) {
           state.when(
-              loading: () {},
-              authenticate: () {
-                context.router.replace(const LoginScreen());
-              },
-              success: () {
-                context.router.replace(const NoteListScreen());
-              });
+            loading: () {},
+            authenticate: () {
+              context.router.replace(const LoginScreen());
+            },
+            success: () {
+              context.router.replace(const NoteListScreen());
+            },
+          );
         },
         child: Scaffold(
           body: Center(

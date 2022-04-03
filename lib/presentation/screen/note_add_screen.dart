@@ -39,16 +39,17 @@ class _NoteAddScreenState extends State<NoteAddScreen> {
       child: BlocConsumer<NoteAddCubit, NoteAddState>(
         listener: (context, state) {
           state.maybeWhen(
-              success: () {
-                widget.onRefresh(true);
-                context.router.pop();
-              },
-              error: (message) {
-                ScaffoldMessenger.of(context)
-                  ..hideCurrentSnackBar()
-                  ..showSnackBar(SnackBar(content: Text(message)));
-              },
-              orElse: () {});
+            success: () {
+              widget.onRefresh(true);
+              context.router.pop();
+            },
+            error: (message) {
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(SnackBar(content: Text(message)));
+            },
+            orElse: () {},
+          );
         },
         builder: (context, state) {
           return Scaffold(

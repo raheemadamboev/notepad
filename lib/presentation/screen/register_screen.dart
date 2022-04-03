@@ -38,15 +38,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
       child: BlocConsumer<RegisterCubit, RegisterState>(
         listener: (context, state) {
           state.maybeWhen(
-              success: () {
-                context.router.replaceAll([const NoteListScreen()]);
-              },
-              error: (message) {
-                ScaffoldMessenger.of(context)
-                  ..hideCurrentSnackBar()
-                  ..showSnackBar(SnackBar(content: Text(message)));
-              },
-              orElse: () {});
+            success: () {
+              context.router.replaceAll([const NoteListScreen()]);
+            },
+            error: (message) {
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(SnackBar(content: Text(message)));
+            },
+            orElse: () {},
+          );
         },
         builder: (context, state) {
           return Scaffold(
@@ -63,17 +64,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextField(
-                      keyboardType: TextInputType.emailAddress,
+                      controller: _mail,
                       autocorrect: false,
                       enableSuggestions: false,
-                      controller: _mail,
+                      keyboardType: TextInputType.emailAddress,
                       decoration: const InputDecoration(hintText: "Enter your mail"),
                     ),
                     TextField(
-                      obscureText: true,
+                      controller: _password,
                       autocorrect: false,
                       enableSuggestions: false,
-                      controller: _password,
+                      obscureText: true,
                       decoration: const InputDecoration(hintText: "Enter your password"),
                     ),
                     TextButton(

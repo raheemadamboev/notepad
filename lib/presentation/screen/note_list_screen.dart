@@ -21,12 +21,13 @@ class _NoteListScreenState extends State<NoteListScreen> {
       child: BlocConsumer<NoteListCubit, NoteListState>(
         listener: (context, state) {
           state.maybeWhen(
-              error: (message) {
-                ScaffoldMessenger.of(context)
-                  ..hideCurrentSnackBar()
-                  ..showSnackBar(SnackBar(content: Text(message)));
-              },
-              orElse: () {});
+            error: (message) {
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(SnackBar(content: Text(message)));
+            },
+            orElse: () {},
+          );
         },
         builder: (context, state) {
           return Scaffold(
