@@ -13,7 +13,7 @@ As a Native Android developer there are so many similarities in Flutter and Nati
 
 <a href="https://github.com/raheemadamboev/notepad/blob/master/demo.apk">Download demo</a>
 
-**Tech Stack**
+**Tech stack:**
 
 - MVVM
 - Firebase
